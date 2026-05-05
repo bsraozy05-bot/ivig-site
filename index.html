@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>IVIG Doz Hesaplayıcı</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: 50px auto;
+      text-align: center;
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .warning {
+      margin-top: 20px;
+      font-size: 12px;
+      color: red;
+    }
+  </style>
+</head><body><h2>IVIG Doz Hesaplayıcı</h2><input type="number" id="weight" placeholder="Kilo (kg)" min="1"><select id="dose">
+  <option value="">Doz seçiniz (mg/kg)</option>
+  <option value="400">400 mg/kg</option>
+  <option value="500">500 mg/kg</option>
+  <option value="600">600 mg/kg</option>
+</select><button onclick="hesapla()">Hesapla</button>
+
+<div class="result" id="result"></div><div class="warning">
+Bu hesaplayıcı yalnızca eğitim amaçlıdır. Klinik karar için kullanılmaz.
+</div><script>
+function hesapla() {
+  let weight = document.getElementById("weight").value;
+  let dose = document.getElementById("dose").value;
+  let resultBox = document.getElementById("result");
+
+  // Hata kontrolleri
+  if (weight === "" || weight <= 0) {
+    resultBox.innerHTML = "Lütfen geçerli bir kilo giriniz.";
+    return;
+  }
+
+  if (dose === "") {
+    resultBox.innerHTML = "Lütfen doz seçiniz.";
+    return;
+  }
+
+  // Hesaplama
+  let totalDoseGram = (weight * dose) / 1000;
+
+  // Sonuç
+  resultBox.innerHTML = 
+    "Toplam IVIG dozu: " + totalDoseGram.toFixed(2) + " gram";
+}
+</script></body>
+</html>
